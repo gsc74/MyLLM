@@ -7,9 +7,9 @@ tags:
   - dpo
 ---
 
-# Ramanujan-1B
+# MyLLM-1B
 
-Ramanujan-1B is a 1.055B-parameter decoder-only math language model trained on
+MyLLM-1B is a 1.055B-parameter decoder-only math language model trained on
 OpenWebMath, supervised fine-tuned on mixed math/instruction data, and aligned
 with DPO.
 
@@ -19,7 +19,7 @@ SwiGLU, RMSNorm, interleaved RoPE (`theta=500000`), and an 8192-token context.
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-path = "model/Ramanujan-1B"
+path = "MyLLM-1B-HF"
 tokenizer = AutoTokenizer.from_pretrained(path, trust_remote_code=True)
 model = AutoModelForCausalLM.from_pretrained(
     path, trust_remote_code=True, torch_dtype="auto"

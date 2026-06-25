@@ -1,6 +1,6 @@
 <div align="center">
 
-# Ramanujan-1B
+# MyLLM-1B
 
 **A tiny, general-purpose math assistant that runs on your laptop.**
 
@@ -29,10 +29,10 @@ A **1.05B-parameter** decoder-only model for basic math: pretrained on open math
 
 | Format | Use for | Link |
 |---|---|---|
-| GGUF (BF16, ~2 GB) | Ollama / llama.cpp | [Release asset](https://github.com/gsc74/Ramanujan/releases/latest/download/Ramanujan-1B-BF16.gguf) |
-| Transformers (safetensors) | Python / PyTorch | [Ramanujan-1B-HF/](https://github.com/gsc74/Ramanujan/tree/main/Ramanujan-1B-HF) + [weights from Release](https://github.com/gsc74/Ramanujan/releases/latest) |
+| GGUF (BF16, ~2 GB) | Ollama / llama.cpp | [Release asset](https://github.com/gsc74/MyLLM/releases/latest/download/MyLLM-1B-BF16.gguf) |
+| Transformers (safetensors) | Python / PyTorch | [MyLLM-1B-HF/](https://github.com/gsc74/MyLLM/tree/main/MyLLM-1B-HF) + [weights from Release](https://github.com/gsc74/MyLLM/releases/latest) |
 
-> The model weights (the `.gguf` and `.safetensors` files, ~2 GB each) are attached as **GitHub Release assets**. For the Transformers version, clone the repo and drop the `model-0000*.safetensors` files from the Release into `Ramanujan-1B-HF/`.
+> The model weights (the `.gguf` and `.safetensors` files, ~2 GB each) are attached as **GitHub Release assets**. For the Transformers version, clone the repo and drop the `model-0000*.safetensors` files from the Release into `MyLLM-1B-HF/`.
 
 ## Usage
 
@@ -44,16 +44,16 @@ A **1.05B-parameter** decoder-only model for basic math: pretrained on open math
 Install from [ollama.com](https://ollama.com/download), then from inside this folder:
 
 ```bash
-ollama create ramanujan-1b -f Modelfile   # one-time (registers chat template, stops, temp 0.7)
-ollama run ramanujan-1b "What is 2+2?"
+ollama create myllm-1b -f Modelfile   # one-time (registers chat template, stops, temp 0.7)
+ollama run myllm-1b "What is 2+2?"
 ```
 
-**Desktop GUI:** after `ollama create`, open the Ollama app, pick **`ramanujan-1b`** from the model selector, and chat. To change sampling in a session: `/set parameter temperature 0.7`.
+**Desktop GUI:** after `ollama create`, open the Ollama app, pick **`myllm-1b`** from the model selector, and chat. To change sampling in a session: `/set parameter temperature 0.7`.
 
 ### llama.cpp
 
 ```bash
-llama-cli -m Ramanujan-1B-BF16.gguf --jinja \
+llama-cli -m MyLLM-1B-BF16.gguf --jinja \
   -p "What is 2+2?" \
   --temp 0.7 --top-p 0.9 --top-k 40 --repeat-penalty 1.3
 ```
@@ -63,7 +63,7 @@ llama-cli -m Ramanujan-1B-BF16.gguf --jinja \
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-path = "Ramanujan-1B-HF"
+path = "MyLLM-1B-HF"
 tok = AutoTokenizer.from_pretrained(path, trust_remote_code=True)
 model = AutoModelForCausalLM.from_pretrained(path, trust_remote_code=True, torch_dtype="auto")
 

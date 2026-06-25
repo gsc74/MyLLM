@@ -1,8 +1,8 @@
-# Ollama Modelfile for MyLLM / Ramanujan-1B (GGUF)
-# Build:  ollama create ramanujan-1b -f Modelfile
-# Run:    ollama run ramanujan-1b "What is 2+2?"
+# Ollama Modelfile for MyLLM-1B (GGUF)
+# Build:  ollama create myllm-1b -f Modelfile
+# Run:    ollama run myllm-1b "What is 2+2?"
 #
-FROM ./Ramanujan-1B-BF16.gguf
+FROM ./MyLLM-1B-BF16.gguf
 
 # Chat format must match training:  <|role|>\n{content}<|end|>\n ... <|assistant|>\n
 TEMPLATE """{{ if .System }}<|system|>
