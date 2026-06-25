@@ -4,7 +4,7 @@
 
 **A tiny, general-purpose math assistant that runs on your laptop.**
 
-[![GGUF](https://img.shields.io/badge/format-GGUF-blue)](#download) [![Params](https://img.shields.io/badge/params-1.05B-green)](#model-summary) [![Runs on](https://img.shields.io/badge/runs%20on-Ollama%20%7C%20llama.cpp-orange)](#usage) [![License](https://img.shields.io/badge/license-Apache--2.0-lightgrey)](#license)
+[![GGUF](https://img.shields.io/badge/format-GGUF-blue)](#download) [![Params](https://img.shields.io/badge/params-1.05B-green)](#model-summary) [![Runs on](https://img.shields.io/badge/runs%20on-LM%20Studio%20%7C%20llama.cpp-orange)](#usage) [![License](https://img.shields.io/badge/license-Apache--2.0-lightgrey)](#license)
 
 </div>
 
@@ -29,7 +29,7 @@ A **1.05B-parameter** decoder-only model for basic math: pretrained on open math
 
 | Format | Use for | Link |
 |---|---|---|
-| GGUF (BF16, ~2 GB) | Ollama / llama.cpp | [Release asset](https://github.com/gsc74/MyLLM/releases/latest/download/MyLLM-1B-BF16.gguf) |
+| GGUF (BF16, ~2 GB) | LM Studio / llama.cpp | [Release asset](https://github.com/gsc74/MyLLM/releases/latest/download/MyLLM-1B-BF16.gguf) |
 | Transformers (safetensors) | Python / PyTorch | [MyLLM-1B-HF/](https://github.com/gsc74/MyLLM/tree/main/MyLLM-1B-HF) + [weights from Release](https://github.com/gsc74/MyLLM/releases/latest) |
 
 > The model weights (the `.gguf` and `.safetensors` files, ~2 GB each) are attached as **GitHub Release assets**. For the Transformers version, clone the repo and drop the `model-0000*.safetensors` files from the Release into `MyLLM-1B-HF/`.
@@ -39,16 +39,14 @@ A **1.05B-parameter** decoder-only model for basic math: pretrained on open math
 > [!IMPORTANT]
 > Run with **temperature ≈ 0.7** and a **repeat penalty ≈ 1.3**. Pure greedy decoding makes this small model loop; these settings keep answers concise and let it stop cleanly.
 
-### Ollama (easiest, for laptops)
+### LM Studio (easiest, for laptops)
 
-Install from [ollama.com](https://ollama.com/download), then from inside this folder:
+[LM Studio](https://lmstudio.ai) is a free desktop app (macOS, Windows, Linux) with a chat GUI.
 
-```bash
-ollama create myllm-1b -f Modelfile   # one-time (registers chat template, stops, temp 0.7)
-ollama run myllm-1b "What is 2+2?"
-```
-
-**Desktop GUI:** after `ollama create`, open the Ollama app, pick **`myllm-1b`** from the model selector, and chat. To change sampling in a session: `/set parameter temperature 0.7`.
+1. **Install** LM Studio from [lmstudio.ai](https://lmstudio.ai) and open it.
+2. **Add the model:** download `MyLLM-1B-BF16.gguf` from the [Release](https://github.com/gsc74/MyLLM/releases/latest), then in LM Studio go to **My Models -> Import** (or drop the `.gguf` into the LM Studio models folder).
+3. **Load it:** open the chat tab, pick **MyLLM-1B** from the model selector at the top, and wait for it to load. The embedded chat template and stop token (`<|end|>`) are picked up automatically.
+4. **Set sampling** in the right-hand panel: **Temperature 0.7**, **Repeat Penalty 1.3** (Top P 0.9, Top K 40), then chat.
 
 ### llama.cpp
 
