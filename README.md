@@ -128,17 +128,17 @@ A black hole is an object in space that has not been fully formed, but has been 
 | Stage | Dataset | Amount | License |
 |---|---|---:|---|
 | Pretraining Data 1 | [OpenWebMath](https://huggingface.co/datasets/open-web-math/open-web-math) | 12,540,182,528 input tokens | ODC-By 1.0 |
-| Pretraining Data 2 | FineWeb-Edu + Cosmopedia auto_math_text | 15,000,061,824 input tokens | Dataset-specific |
-| Pretraining total | OpenWebMath + FineWeb-Edu + Cosmopedia auto_math_text | 27,540,244,352 input tokens | Dataset-specific |
+| Pretraining Data 2 | [FineWeb-Edu](https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu) + [Cosmopedia](https://huggingface.co/datasets/HuggingFaceTB/cosmopedia) auto_math_text | 15,000,061,824 input tokens | ODC-By 1.0 / Apache-2.0 |
+| Pretraining total | OpenWebMath + FineWeb-Edu + Cosmopedia auto_math_text | 27,540,244,352 input tokens | ODC-By 1.0 / Apache-2.0 |
 | SFT | [MetaMathQA](https://huggingface.co/datasets/meta-math/MetaMathQA) | 99,178 examples | MIT |
 | SFT | [NuminaMath-CoT](https://huggingface.co/datasets/AI-MO/NuminaMath-CoT) | 260,085 examples | Apache-2.0 |
 | SFT | [OpenMathInstruct-2](https://huggingface.co/datasets/nvidia/OpenMathInstruct-2) | 228,408 examples | CC-BY-4.0 |
-| SFT | Orca Math word problems | 109,618 examples | Dataset-specific |
-| SFT | UltraChat | 202,618 examples | Dataset-specific |
-| SFT total | Mixed math + English chat SFT | 899,907 examples / 403,406,096 tokens | Dataset-specific |
+| SFT | [Orca Math word problems](https://huggingface.co/datasets/microsoft/orca-math-word-problems-200k) | 109,618 examples | MIT |
+| SFT | [UltraChat](https://huggingface.co/datasets/HuggingFaceH4/ultrachat_200k) | 202,618 examples | MIT |
+| SFT total | Mixed math + English chat SFT | 899,907 examples / 403,406,096 tokens | MIT / Apache-2.0 / CC-BY-4.0 |
 | Math GRPO reward | [GSM8K](https://huggingface.co/datasets/openai/gsm8k) | 7,473 prompts / 700 steps | MIT |
-| DPO | Mixed preference pairs | 73,874 pairs / 1 epoch | Dataset-specific |
-| English GRPO | UltraChat prompt bank | 8,000 prompts / 200 steps | Dataset-specific |
+| DPO | [distilabel-math-preference](https://huggingface.co/datasets/argilla/distilabel-math-preference-dpo) + [UltraFeedback](https://huggingface.co/datasets/HuggingFaceH4/ultrafeedback_binarized) + [Intel orca_dpo_pairs](https://huggingface.co/datasets/Intel/orca_dpo_pairs) | 73,874 pairs / 1 epoch | Apache-2.0 / MIT |
+| English GRPO | [UltraChat](https://huggingface.co/datasets/HuggingFaceH4/ultrachat_200k) prompt bank | 8,000 prompts / 200 steps | MIT |
 
 ## License
 
