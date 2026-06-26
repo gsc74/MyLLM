@@ -5,7 +5,7 @@
 #
 # Environment variables:
 #   THREADS   — number of CPU threads (default: all available)
-#   DEVICE    — torch device: cpu or cuda (default: cpu)
+#   DEVICE    — torch device: cpu or xpu (Intel GPU) (default: cpu)
 #   MAX_NEW   — max new tokens to generate (default: 256)
 set -euo pipefail
 

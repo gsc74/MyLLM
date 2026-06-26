@@ -46,7 +46,7 @@ cd MyLLM
 pip install torch transformers
 ```
 
-Runs on **CPU** (default) or **GPU** (`DEVICE=cuda`). About 2 GB of RAM/VRAM is needed for the BF16 weights.
+Runs on **CPU** (default) or **Intel GPU** (`DEVICE=xpu`). About 2 GB of RAM/VRAM is needed for the BF16 weights.
 
 ## Usage
 
@@ -69,15 +69,15 @@ Optional settings (environment variables):
 
 | Variable | Default | Description |
 |---|---|---|
-| `DEVICE` | `cpu` | torch device: `cpu` or `cuda` |
+| `DEVICE` | `cpu` | torch device: `cpu` or `xpu` (Intel GPU) |
 | `MAX_NEW` | `256` | max new tokens per reply |
 | `THREADS` | `64` | CPU threads |
 | `TEMPERATURE` | `0` | sampling temperature (`0` = greedy, best for math; raise for more variety) |
 | `REPETITION_PENALTY` | `1.3` | discourages repetition |
 
 ```bash
-# example: run on GPU with shorter replies
-DEVICE=cuda MAX_NEW=128 ./infer.sh
+# example: run on an Intel GPU with shorter replies
+DEVICE=xpu MAX_NEW=128 ./infer.sh
 ```
 
 ### Transformers (PyTorch)

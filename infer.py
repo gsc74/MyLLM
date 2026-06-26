@@ -40,6 +40,17 @@ print(f"  Sampling: temp={TEMPERATURE} top_p={TOP_P} top_k={TOP_K} "
 print(f"{'='*60}\n")
 print("Loading model...")
 
+# Intel GPU (XPU) support: importing IPEX registers the xpu backend on older
+# torch builds; on torch >= 2.5 xpu is native and this is a no-op if absent.
+if DEVICE.startswith("xpu"):
+    try:
+        import intel_extension_for_pytorch as ipex  # noqa: F401
+    except Exception as exc:
+        print(f"Note: intel_extension_for_pytorch not imported ({exc}); "
+              f"relying on native torch.xpu.")
+    if not (hasattr(torch, "xpu") and torch.xpu.is_available()):
+        raise SystemExit("DEVICE=xpu requested but no Intel XPU is available.")
+
 tokenizer = AutoTokenizer.from_pretrained(MODEL_DIR, trust_remote_code=True)
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_DIR,
