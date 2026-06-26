@@ -2,9 +2,9 @@
 
 # MyLLM-1B
 
-**A tiny, general-purpose math assistant that runs on your laptop.**
+**A tiny math and English tutor for students that runs on your laptop.**
 
-[![GGUF](https://img.shields.io/badge/format-GGUF-blue)](#download) [![Params](https://img.shields.io/badge/params-1.05B-green)](#model-summary) [![Runs on](https://img.shields.io/badge/runs%20on-LM%20Studio%20%7C%20llama.cpp-orange)](#usage) [![License](https://img.shields.io/badge/license-Apache--2.0-lightgrey)](#license)
+[![Transformers](https://img.shields.io/badge/format-Transformers-blue)](#download) [![Params](https://img.shields.io/badge/params-1.05B-green)](#model-summary) [![Runs on](https://img.shields.io/badge/runs%20on-PyTorch-orange)](#usage) [![License](https://img.shields.io/badge/license-Apache--2.0-lightgrey)](#license)
 
 </div>
 
@@ -14,7 +14,7 @@
 
 ## Model Summary
 
-A **1.05B-parameter** decoder-only model for basic math: pretrained on open math web text, SFT on math instructions, then aligned (DPO + GRPO).
+A **1.05B-parameter** decoder-only model for student tutoring in math and English: pretrained on math/general text, SFT on math and chat instructions, then aligned for clearer and more accurate answers.
 
 | | |
 |---|---|
@@ -29,32 +29,11 @@ A **1.05B-parameter** decoder-only model for basic math: pretrained on open math
 
 | Format | Use for | Link |
 |---|---|---|
-| GGUF (BF16, ~2 GB) | LM Studio / llama.cpp | [Release asset](https://github.com/gsc74/MyLLM/releases/latest/download/MyLLM-1B-BF16.gguf) |
 | Transformers (safetensors) | Python / PyTorch | [MyLLM-1B-HF/](https://github.com/gsc74/MyLLM/tree/main/MyLLM-1B-HF) + [weights from Release](https://github.com/gsc74/MyLLM/releases/latest) |
 
-> The model weights (the `.gguf` and `.safetensors` files, ~2 GB each) are attached as **GitHub Release assets**. For the Transformers version, clone the repo and drop the `model-0000*.safetensors` files from the Release into `MyLLM-1B-HF/`.
+> The model weights (`model-0000*.safetensors`, ~2 GB total) are attached as a **GitHub Release asset**. Clone the repo and drop them into `MyLLM-1B-HF/`.
 
 ## Usage
-
-> [!IMPORTANT]
-> Run with **temperature ≈ 0.7** and a **repeat penalty ≈ 1.3**. Pure greedy decoding makes this small model loop; these settings keep answers concise and let it stop cleanly.
-
-### LM Studio (easiest, for laptops)
-
-[LM Studio](https://lmstudio.ai) is a free desktop app (macOS, Windows, Linux) with a chat GUI.
-
-1. **Install** LM Studio from [lmstudio.ai](https://lmstudio.ai) and open it.
-2. **Add the model:** download `MyLLM-1B-BF16.gguf` from the [Release](https://github.com/gsc74/MyLLM/releases/latest), then in LM Studio go to **My Models -> Import** (or drop the `.gguf` into the LM Studio models folder).
-3. **Load it:** open the chat tab, pick **MyLLM-1B** from the model selector at the top, and wait for it to load. The embedded chat template and stop token (`<|end|>`) are picked up automatically.
-4. **Set sampling** in the right-hand panel: **Temperature 0.7**, **Repeat Penalty 1.3** (Top P 0.9, Top K 40), then chat.
-
-### llama.cpp
-
-```bash
-llama-cli -m MyLLM-1B-BF16.gguf --jinja \
-  -p "What is 2+2?" \
-  --temp 0.7 --top-p 0.9 --top-k 40 --repeat-penalty 1.3
-```
 
 ### Transformers (PyTorch)
 
@@ -85,13 +64,20 @@ Therefore: \boxed{\frac{1}{3}x^{3}}
 
 ## Training Data & Licenses
 
-| Stage | Dataset | License |
-|---|---|---|
-| Pretraining | [OpenWebMath](https://huggingface.co/datasets/open-web-math/open-web-math) | ODC-By 1.0 |
-| SFT | [MetaMathQA](https://huggingface.co/datasets/meta-math/MetaMathQA) | MIT |
-| SFT | [NuminaMath-CoT](https://huggingface.co/datasets/AI-MO/NuminaMath-CoT) | Apache-2.0 |
-| SFT | [OpenMathInstruct-2](https://huggingface.co/datasets/nvidia/OpenMathInstruct-2) | CC-BY-4.0 |
-| GRPO reward | [GSM8K](https://huggingface.co/datasets/openai/gsm8k) | MIT |
+| Stage | Dataset | Amount | License |
+|---|---|---:|---|
+| Pretraining Data 1 | [OpenWebMath](https://huggingface.co/datasets/open-web-math/open-web-math) | 12,540,182,528 input tokens | ODC-By 1.0 |
+| Pretraining Data 2 | FineWeb-Edu + Cosmopedia auto_math_text | 15,000,061,824 input tokens | Dataset-specific |
+| Pretraining total | OpenWebMath + FineWeb-Edu + Cosmopedia auto_math_text | 27,540,244,352 input tokens | Dataset-specific |
+| SFT | [MetaMathQA](https://huggingface.co/datasets/meta-math/MetaMathQA) | 99,178 examples | MIT |
+| SFT | [NuminaMath-CoT](https://huggingface.co/datasets/AI-MO/NuminaMath-CoT) | 260,085 examples | Apache-2.0 |
+| SFT | [OpenMathInstruct-2](https://huggingface.co/datasets/nvidia/OpenMathInstruct-2) | 228,408 examples | CC-BY-4.0 |
+| SFT | Orca Math word problems | 109,618 examples | Dataset-specific |
+| SFT | UltraChat | 202,618 examples | Dataset-specific |
+| SFT total | Mixed math + English chat SFT | 899,907 examples / 403,406,096 tokens | Dataset-specific |
+| Math GRPO reward | [GSM8K](https://huggingface.co/datasets/openai/gsm8k) | 7,473 prompts / 700 steps | MIT |
+| DPO | Mixed preference pairs | 73,874 pairs / 1 epoch | Dataset-specific |
+| English GRPO | UltraChat prompt bank | 8,000 prompts / 200 steps | Dataset-specific |
 
 ## License
 
