@@ -147,10 +147,10 @@ Using the power rule, d/dx(xⁿ) = n·x^(n-1).
 Therefore, the derivative of x² is 2x^(2-1) = 2x.
 ```
 
-**Prompt:** `What is a black hole?`
+**Prompt:** `What is DNA?`
 
 ```
-A black hole is an object in space that has not been fully formed, but has been heated to millions of degrees by its own gravity. The gravitational force between two objects with masses greater than or equal to that of the sun can cause them to collapse into each other, forming a singularity, a point where they become so dense that nothing, including light, can escape from it.
+DNA, or deoxyribonucleic acid, is an essential component of all living organisms. It plays a crucial role in maintaining genetic information within cells, as well as in regulating gene expression (i.e., how genes are turned on and off). The structure of DNA consists of four chemical bases: adenine (A), thymine (T), cytosine (C) and guanine (G).
 ```
 
 > MyLLM is a tiny model focused on high-school math. It can chat in English, but answers outside math may be incomplete or inaccurate.
